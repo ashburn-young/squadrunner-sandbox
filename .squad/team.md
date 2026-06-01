@@ -1,102 +1,46 @@
-# Mission Control — Squad Charter
+# Mission Control Squad
 
-> Squad configuration for the **squadrunner-sandbox** backlog.
+## Identity
+- **Squad:** mission-control
+- **Owner:** ashburn-young
+- **Repository:** github.com/ashburn-young/squadrunner-sandbox
 
-## Mission
+The 23-member Mission Control squad, adapted from Young Kim's Clawpilot agents
+to run autonomously via the SquadRunner pattern (`squad triage --execute` in a
+tmux session on an Azure VM).
 
-Execute work from the GitHub backlog with the discipline of a NASA Mission Control flight team — clear ownership, explicit handoffs, every decision logged.
+## Members
 
----
+| Name | Role | Charter | Status |
+|------|------|---------|--------|
+| Flight | Lead — Architecture & Patterns | `.squad/agents/flight/charter.md` | ✅ Active |
+| Ralph | Work Monitor — Persistent Memory | `.squad/agents/ralph/charter.md` | ✅ Active |
+| Scribe | Session Logger — Team Memory | `.squad/agents/scribe/charter.md` | ✅ Active |
+| EECOM | Core Dev — Implementation | `.squad/agents/eecom/charter.md` | ✅ Active |
+| CONTROL | TypeScript Engineer — Type Contracts | `.squad/agents/control/charter.md` | ✅ Active |
+| GNC | Node.js Runtime — Event Loop & Perf | `.squad/agents/gnc/charter.md` | ✅ Active |
+| CAPCOM | SDK Expert — Platform Boundaries | `.squad/agents/capcom/charter.md` | ✅ Active |
+| DSKY | TUI Engineer — Terminal Rendering | `.squad/agents/dsky/charter.md` | ✅ Active |
+| VOX | REPL & Interactive Shell | `.squad/agents/vox/charter.md` | ✅ Active |
+| INCO | CLI UX & Visual Design | `.squad/agents/inco/charter.md` | ✅ Active |
+| GUIDO | VS Code Extension Engineer | `.squad/agents/guido/charter.md` | ✅ Active |
+| Handbook | SDK Usability & Documentation | `.squad/agents/handbook/charter.md` | ✅ Active |
+| Procedures | Prompt Engineering | `.squad/agents/procedures/charter.md` | ✅ Active |
+| EGIL | Power BI & Fabric — Code-First BI | `.squad/agents/egil/charter.md` | ✅ Active |
+| Telemetry | Aspire & Observability | `.squad/agents/telemetry/charter.md` | ✅ Active |
+| Booster | CI/CD Engineer | `.squad/agents/booster/charter.md` | ✅ Active |
+| Sims | E2E Test Engineer | `.squad/agents/sims/charter.md` | ✅ Active |
+| FIDO | Quality Owner — QA | `.squad/agents/fido/charter.md` | ✅ Active |
+| Surgeon | Release Manager | `.squad/agents/surgeon/charter.md` | ✅ Active |
+| Network | Distribution & Install | `.squad/agents/network/charter.md` | ✅ Active |
+| PAO | DevRel — Public Affairs | `.squad/agents/pao/charter.md` | ✅ Active |
+| RETRO | Security | `.squad/agents/retro/charter.md` | ✅ Active |
 
-## Roster
+> Note: `Ralph` and `Scribe` are excluded from auto-triage by the squad runtime
+> (built-in monitor / logger roles) but remain part of the roster for reference.
 
-| Agent | Role | Handles |
-|-------|------|---------|
-| Flight | Lead / Architect | Triage, breakdown, architecture, code review (default for unrouted issues) |
-| Ralph | Work Monitor | Polls backlog, routes by label, maintains cross-session context |
-| Scribe | Session Logger | Docs, ADRs, release notes, history, READMEs |
-| EECOM | Core Dev | Practical implementation, makes-it-work-then-makes-it-right |
-| CONTROL | TypeScript Engineer | Types, contracts, compile-time guarantees |
-| GNC | Node.js Runtime | Runtime perf, event-loop, memory, async correctness |
-| CAPCOM | SDK Expert | Platform boundaries, public SDK surfaces |
-| DSKY | TUI Engineer | Terminal rendering, ANSI, frame timing |
-| VOX | REPL & Interactive Shell | REPL, prompt handling, input flow |
-| INCO | CLI UX & Visual Design | Visual design, layout, interaction polish |
-| GUIDO | VS Code Extension | VS Code APIs, extension host bridge |
-| Handbook | SDK Usability | Reference docs, API ergonomics |
-| Procedures | Prompt Engineer | Prompts, instruction sets, agent definitions |
-| EGIL | Power BI & Fabric | Reports, semantic models, Fabric workspaces |
-| Telemetry | Aspire & Observability | Logs, metrics, traces, OpenTelemetry |
-| Booster | CI/CD | Pipelines, validation gates, release automation |
-| Sims | E2E Test Engineer | Playwright, end-to-end scenarios |
-| FIDO | Quality Owner | Test plans, regression hunting, edge cases |
-| Surgeon | Release Manager | Versioning, changelog, publish pipeline |
-| Network | Distribution | Install, packaging, update channels |
-| PAO | DevRel | External-facing comms, samples, announcements |
-| RETRO | Security | Threat model, secrets, audit |
+## Project Context
 
----
-
-## Operating Model
-
-- **Backlog-driven**: All work comes from GitHub issues in `ashburn-young/squadrunner-sandbox`.
-- **Label-routed**: `squad:<member>` label routes to a specific agent (see `routing.md`).
-- **Default to Flight**: Issues with only the `squad` gate label go to Flight for triage.
-- **Priority-ordered**: P0 > P1 > P2. P3 is skip.
-- **PR-based**: All changes via pull request, opened as draft until reviewed.
-- **CI-gated**: Green CI required for merge once CI is configured.
-- **Chronicled**: Scribe logs every dispatch and decision under `.squad/engagements/`.
-
----
-
-## Work Scope
-
-| Path | Primary Owner | Secondary |
-|------|---------------|-----------|
-| `docs/`, `*.md`, `README.md` | Scribe | Handbook |
-| `scripts/`, `tools/` | EECOM | Booster |
-| `src/cli/`, REPL surfaces | VOX | DSKY |
-| `src/types/`, `*.d.ts` | CONTROL | EECOM |
-| `src/runtime/`, perf code | GNC | EECOM |
-| `extension/` (VS Code) | GUIDO | CAPCOM |
-| `e2e/`, `tests/e2e/` | Sims | FIDO |
-| `.github/workflows/` | Booster | Surgeon |
-| Power BI / Fabric artifacts | EGIL | Telemetry |
-| Security-sensitive code, secrets | RETRO | Flight |
-
----
-
-## Labels
-
-### Required for pickup
-- `squad` — gate label, marks issue as ready
-- `squad:<member>` — routes to specific agent
-- `priority:P0/P1/P2` — priority level
-
-### Status
-- `blocked` — cannot proceed
-- `in-progress` — currently being worked
-- `epic` — container issue, not directly executed
-
----
-
-## Engagement state
-
-Each engagement creates a state folder:
-
-```
-.squad/engagements/<epic-code>/
-├── log.md         # Chronological activity log (Scribe)
-├── handoffs.md    # Handoff notes between agents
-├── drift.md       # Design drift notes
-└── packet-toc.md  # Deliverable tracking
-```
-
----
-
-## Working agreements
-
-- **Definition of Ready**: clear title, goal, scope, out-of-scope, acceptance checkboxes, `squad` + `squad:<member>` + `priority:Pn` labels.
-- **Definition of Done**: passing CI, PR description references issue, Scribe entry written.
-- **Handoff**: when handing off, comment `Handing off to @<agent> for <reason>`, swap labels.
-- **Reviewer rejection lockout**: if Flight rejects a PR, the original author is locked out and must request review explicitly.
+Sandbox repository used to validate SquadRunner against Mission Control. Issues
+labelled `squad` are picked up by `squad triage --execute` on the VM and routed
+to the matching `squad:<name>` member based on `.squad/routing.md`.
