@@ -13,6 +13,8 @@ This repo exists so the squad has a real GitHub backlog to poll, triage, and ope
 
 See `.squad/team.md` for the charter and `.squad/routing.md` for label rules.
 
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for how to file issues and work with the squad runner.
+
 ---
 
 ## Original README
