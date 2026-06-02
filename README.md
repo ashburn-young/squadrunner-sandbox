@@ -11,7 +11,7 @@ This repo exists so the squad has a real GitHub backlog to poll, triage, and ope
 3. Ralph picks up the issue, dispatches to the routed Mission Control member, or routes to Flight for triage if no member label is present.
 4. The member opens a draft PR against `main` for human review.
 
-See `.squad/team.md` for the charter and `.squad/routing.md` for label rules.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for how to file work and the PR review flow, `.squad/team.md` for the charter, and `.squad/routing.md` for label rules.
 
 ---
 
